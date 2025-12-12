@@ -1,19 +1,19 @@
 2025年　12月12日（金）発表　他言語プロジェクト
 
-Todoリストと職場安全活動表のデジタル化
--日常のやることリストで業務を共有する。
--職場安全活動表をデジタル化することで、手書き書類を低減する。
--安全に対する感度を落とさずにデジタル化を進めるにあたり、日々の記入時間を低減する。
--安全の現地現物をこれまで同様に推進し、KYをデータとして記録に残す。
+### Todoリストと職場安全活動表のデジタル化
+- 日常のやることリストで業務を共有する。
+- 職場安全活動表をデジタル化することで、手書き書類を低減する。
+- 安全に対する感度を落とさずにデジタル化を進めるにあたり、日々の記入時間を低減する。
+- 安全の現地現物をこれまで同様に推進し、KYをデータとして記録に残す。
 
 ### 技術スタック
 
 ### Backend
--Kotlin
--Spring Boot 4
--Spring Data JPA + Hibernate
--PostgreSQL
--Gradle
+- Kotlin
+- Spring Boot 4
+- Spring Data JPA + Hibernate
+- PostgreSQL
+- Gradle
 
 ### Frontend
 - Vue 3
@@ -21,10 +21,10 @@ Todoリストと職場安全活動表のデジタル化
 - Vuetify
 - Node.js / npm
 
-事前準備
-[Java 21 (Amazon Corretto 21)]
-[Node.js 22]
-[PostgreSQL 14]
+###事前準備
+- [Java 21 (Amazon Corretto 21)]
+- [Node.js 22]
+- [PostgreSQL 14]
 
 
 1.DB作成
