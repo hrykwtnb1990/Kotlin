@@ -17,12 +17,10 @@ class NoteController(
         val end = start.withDayOfMonth(start.lengthOfMonth())
         return noteRepository.findByDateBetweenOrderByDateAsc(start, end)
     }
-    // 1件取得
     @GetMapping("/{id}")
     fun getOne(@PathVariable id: Long): Note =
         noteRepository.findById(id)
             .orElseThrow { RuntimeException("Note not found") }
-    // 作成
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     fun create(@RequestBody body: CreateNoteRequest): Note {
@@ -51,7 +49,6 @@ class NoteController(
         note.countermeasureContent = body.countermeasureContent
         return noteRepository.save(note)
     }
-    // ･･･ delete はそのままでOK
 }
 data class CreateNoteRequest(
     val date: String,

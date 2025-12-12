@@ -10,10 +10,28 @@ const activeTab = ref('todo')
   <v-app>
     <v-main>
       <v-container class="mt-4" max-width="900">
-        <v-tabs v-model="activeTab" grow>
-          <v-tab value="todo">Todo</v-tab>
-          <v-tab value="note">職場安全活動表</v-tab>
+        <v-tabs
+          v-model="activeTab"
+          grow
+          class="gs-tabs"
+        >
+          <v-tab
+            value="todo"
+            class="gs-tab"
+            selected-class="gs-tab--active"
+          >
+            Todo
+          </v-tab>
+
+          <v-tab
+            value="note"
+            class="gs-tab"
+            selected-class="gs-tab--active"
+          >
+            職場安全活動表
+          </v-tab>
         </v-tabs>
+
         <div class="mt-4">
           <TodoList v-if="activeTab === 'todo'" />
           <NoteCalendar v-else />
@@ -22,7 +40,21 @@ const activeTab = ref('todo')
     </v-main>
   </v-app>
 </template>
+<style scoped>
 
+.gs-tabs {
+  border: 2px solid #2e7d32;
+  border-radius: 9999px;
+}
+.gs-tab {
+  text-transform: none;
+}
+.gs-tab--active {
+  background-color: #1b5e20;
+  color: #ffffff !important;
+  border-radius: 9999px;
+}
+</style>
 
 
 

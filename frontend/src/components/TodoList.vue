@@ -10,7 +10,6 @@ const todos = ref([])
 const newTitle = ref('')
 const loading = ref(false)
 const error = ref('')
-// 一覧読み込み
 async function loadTodos() {
   loading.value = true
   error.value = ''
@@ -23,7 +22,6 @@ async function loadTodos() {
     loading.value = false
   }
 }
-// 追加
 async function handleAdd() {
   if (!newTitle.value.trim()) return
   try {
@@ -35,7 +33,6 @@ async function handleAdd() {
     error.value = 'Todoの追加に失敗しました'
   }
 }
-// 完了チェック切り替え
 async function toggleCompleted(todo) {
   try {
     const updated = await updateTodo({
@@ -50,7 +47,6 @@ async function toggleCompleted(todo) {
     error.value = '更新に失敗しました'
   }
 }
-// 削除
 async function handleDelete(todo) {
   try {
     await deleteTodo(todo.id)
@@ -67,54 +63,56 @@ onMounted(loadTodos)
     <v-card>
       <v-card-title class="text-h5">GreenSafe Todo</v-card-title>
       <v-card-text>
-        <!-- 入力＋追加ボタン -->
-        <v-row class="mb-4" align="center">
-          <v-col cols="8">
+        <v-row class="mb-4" align="stretch">
+          <v-col cols="8" class="d-flex">
             <v-text-field
               v-model="newTitle"
               label="やることを入力"
               variant="outlined"
               density="comfortable"
+              hide-details
+              class="flex-grow-1"
               @keyup.enter="handleAdd"
             />
           </v-col>
-          <v-col cols="4">
+          <v-col cols="4" class="d-flex">
             <v-btn
               color="primary"
-              block
+              class="flex-grow-1 h-100"
+              size="large"
               @click="handleAdd"
             >
               追加
             </v-btn>
           </v-col>
         </v-row>
-        <!-- ローディング・エラー表示 -->
         <div class="mt-2">
           <div v-if="loading">読み込み中...</div>
           <div v-if="error" class="text-red">
             {{ error }}
           </div>
         </div>
-        <!-- ★ 一覧：チェックボックス + 削除ボタン付き -->
-        <v-list class="mt-4">
+        <v-list class="mt-4" lines="one">
           <v-list-item
             v-for="todo in todos"
             :key="todo.id"
+            class="todo-item"
+            density="compact"
           >
-            <!-- 左側：チェックボックス -->
             <template #prepend>
               <v-checkbox
                 :model-value="todo.completed"
-                @update:model-value="() => toggleCompleted(todo)"
+                @update:model-value="(val) => toggleCompleted(todo, val)"
+                hide-details
               />
             </template>
-            <!-- 中央：タイトル -->
-            <v-list-item-title>
-              <span :style="{ textDecoration: todo.completed ? 'line-through' : 'none' }">
-                {{ todo.title }}
-              </span>
+
+            <v-list-item-title
+              class="todo-title"
+              :class="{ 'todo-title--completed': todo.completed }"
+            >
+              {{ todo.title }}
             </v-list-item-title>
-            <!-- 右側：削除ボタン -->
             <template #append>
               <v-btn
                 color="red"
@@ -130,6 +128,28 @@ onMounted(loadTodos)
     </v-card>
   </v-container>
 </template>
+<style scoped>
+.todo-item {
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+}
+.todo-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.todo-title--completed {
+  text-decoration: line-through;
+}
+</style>
+
+
+
+
+
+
+
 
 
 
